@@ -2,7 +2,7 @@
 
 > 做项目离不开跟时间打交道,如果有快捷的小函数使用,何乐而不为呢
 
-#获取方式
+# 获取方式
 ```
 go get -x -v github.com/yezihack/gotime
 ```
