@@ -2,28 +2,34 @@
 
 > 做项目离不开跟时间打交道,如果有快捷的小函数使用,何乐而不为呢
 
+# 安装
+```
+go get -u github.com/yezihack/gotime
+```
+
 # 时间区
 * 默认中国东八区
 
 # 使用方法
 ```golang
+t := gotime.New()
 //获取当前时间
-tm := gotime.NewGoTime().Now()
+tm := t.Now()
 fmt.Println(tm)
 //print 2018-12-12 15:16:19
 
 //获取当前零晨时间
-tm1 := gotime.NewGoTime().NowStart()
+tm1 := gotime.New().NowStart()
 fmt.Println(tm1)
 //print 2018-12-12 00:00:00
 
 //获取一个最后一刻
-tm2 := gotime.NewGoTime().NowEnd()
+tm2 := gotime.New().NowEnd()
 fmt.Println(tm2)
 //print 2018-12-12 23:59:59
 
 //获取当前时间戳
-tm3 := gotime.NewGoTime().NowUnix()
+tm3 := gotime.New().NowUnix()
 fmt.Println(tm3)
 //1544599059
 ```

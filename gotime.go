@@ -10,7 +10,7 @@ type GoTime struct {
 	Location time.Location
 }
 //实例
-func NewGoTime() *GoTime {
+func New() *GoTime {
 	return &GoTime{}
 }
 //获取当前时间 年-月-日 时:分:秒
