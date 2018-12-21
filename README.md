@@ -7,6 +7,13 @@
 go get -u github.com/yezihack/gotime
 ```
 
+
+# 使用方法
+```golang
+t := gotime.New()
+//获取当前时间
+tm := t.Now()
+
 # 时间区
 * 默认中国东八区
 
@@ -32,6 +39,25 @@ fmt.Println(tm2)
 tm3 := gotime.New().NowUnix()
 fmt.Println(tm3)
 //1544599059
+
+
+```
+
+# 万能的format转换格式函数
+```
+//自定义格式的万能转换时间函数
+tm := gotime.New().Format(gotime.New().NowTime(), "YYYY-MM-DD HH:mm:ss")
+fmt.Println(tm)
+
+//时间
+tm1 := gotime.New().Format(gotime.New().NowTime(), "YYYY-MM-DD")
+fmt.Println(tm1)
+
+tm2 := gotime.New().Format(gotime.New().NowTime(), "HH:mm:ss")
+fmt.Println(tm2)
+
+tm3 := gotime.New().Format(gotime.New().NowTime(), "YYYY/MM/DD HH:mm:ss")
+fmt.Println(tm3)
 ```
 
 # 查询列表
@@ -50,3 +76,4 @@ fmt.Println(tm3)
 |RfcToUnix| RFC格式转时间戳 | 1544599696|
 |GetRFC3339| 获取RFC格式 | 2018-12-12T15:32:25+08:00|
 |ToRFC3339| 转换成RFC格式 | 2018-12-12T15:32:25+08:00|
+|Format| 转换成任意格式 | |
