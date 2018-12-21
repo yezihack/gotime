@@ -10,5 +10,5 @@ const (
 	HMS     = "15:04:05"
 )
 
-//时区
-var Location = time.FixedZone("Asia/Shanghai", 8*60*60)
+//北京东八时区
+var BeijingLocation = time.FixedZone("Asia/Shanghai", 8*60*60)
