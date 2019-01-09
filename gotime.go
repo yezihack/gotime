@@ -102,7 +102,10 @@ func (gt *GoTime) RFC3339To(s string) string {
 	}
 	return t.Format(TT)
 }
-
+//获取格式化的数据
+func (gt *GoTime) GetFormat(format string) string {
+	return gt.Format(gt.NowTime(), format)
+}
 // Format time.Time struct to string
 // MM - month - 01
 // M - month - 1, single bit

@@ -37,3 +37,7 @@ func TestGoTime_ToRFC3339(t *testing.T) {
 	tm := New().ToRFC3339(New().Now())
 	fmt.Println(tm)
 }
+func TestGoTime_GetFormat(t *testing.T) {
+	tm := New().GetFormat("YYYYMM")
+	fmt.Println(tm)
+}
