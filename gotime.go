@@ -4,107 +4,83 @@ import (
 	"fmt"
 	"strings"
 	"time"
+	"golang.org/x/text/currency"
 )
-
-type GoTime struct {
-	Location *time.Location
-}
-
-//实例
-func New() *GoTime {
+func NewBeijing() *GoTime{
 	return &GoTime{
 		Location:BeijingLocation,
 	}
 }
 
 //获取当前时间 年-月-日 时:分:秒
-func (gt *GoTime) Now() string {
-	return gt.NowTime().Format(TT)
+func Now() string {
+	return NewBeijing().Now()
 }
 
 //获取当前时间戳
-func (gt *GoTime) NowUnix() int64 {
-	return gt.NowTime().Unix()
+func NowUnix()int64 {
+	return NewBeijing().NowUnix()
 }
 
 //获取当前时间Time
-func (gt *GoTime) NowTime() time.Time {
-	return time.Now().In(gt.Location)
+func  NowTime() time.Time {
+	return NewBeijing().NowTime()
 }
 
 //获取年月日
-func (gt *GoTime) GetYmd() string {
-	return gt.NowTime().Format(YMD)
+func Ymd() string {
+	return NewBeijing().Ymd()
 }
-
 //获取时分秒
-func (gt *GoTime) GetHms() string {
-	return gt.NowTime().Format(HMS)
+func Hms() string {
+	return NewBeijing().Hms()
 }
 
 //获取当天的开始时间, eg: 2018-01-01 00:00:00
-func (gt *GoTime) NowStart() string {
-	now := gt.NowTime()
-	tm := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, gt.Location)
-	return tm.Format(TT)
+func Start() string {
+	return NewBeijing().Start()
 }
 
 //获取当天的结束时间, eg: 2018-01-01 23:59:59
-func (gt *GoTime) NowEnd() string {
-	now := gt.NowTime()
-	tm := time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 1e9-1, gt.Location)
-	return tm.Format(TT)
+func End() string {
+	return NewBeijing().End()
 }
 
 //当前时间 减去 多少秒
-func (gt *GoTime) Before(beforeSecond int64) string {
-	return time.Unix(gt.NowUnix()-beforeSecond, 0).Format(TT)
+func Before(beforeSecond int64) string {
+	return NewBeijing().Before(beforeSecond)
 }
 
 //当前时间 加上 多少秒
-func (gt *GoTime) Next(beforeSecond int64) string {
-	return time.Unix(gt.NowUnix()+beforeSecond, 0).Format(TT)
+func Next(beforeSecond int64) string {
+	return NewBeijing().Next(beforeSecond)
 }
-
 //2006-01-02T15:04:05Z07:00 转 时间戳
-func (gt *GoTime) RfcToUnix(layout string) int64 { //转化所需模板
-	tm, err := time.ParseInLocation(time.RFC3339, layout, gt.Location) //使用模板在对应时区转化为time.time类型
-	if err != nil {
-		return int64(0)
-	}
-	return tm.Unix()
+func RfcToUnix(s string) int64 { //转化所需模板
+	return NewBeijing().RfcToUnix(s)
 }
 
 //2006-01-02 15:04:05 转 时间戳
-func (gt *GoTime) ToUnix(layout string) int64 {
-	theTime, _ := time.ParseInLocation(TT, layout, gt.Location)
-	return theTime.Unix()
+func ToUnix(s string) int64 {
+	return NewBeijing().ToUnix(s)
 }
 
 //获取RFC3339格式
-func (gt *GoTime) GetRFC3339() string {
-	return gt.NowTime().Format(time.RFC3339)
+func RFC3339() string {
+	return NewBeijing().RFC3339()
 }
 
 //转换成RFC3339格式
-func (gt *GoTime) ToRFC3339(layout string) string {
-	tm, err := time.ParseInLocation(TT, layout, gt.Location)
-	if err != nil {
-		return ""
-	}
-	return tm.Format(time.RFC3339)
+func  ToRFC3339(s string) string {
+	return NewBeijing().ToRFC3339(s)
 }
 //将RFC3339格式转成正常格式
-func (gt *GoTime) RFC3339To(s string) string {
-	t , err := time.ParseInLocation(RFC3339, s, gt.Location)
-	if err != nil {
-		return "0000-00-00 00:00:00"
-	}
-	return t.Format(TT)
+func RFC3339To(s string) string {
+	return NewBeijing().RFC3339To(s)
 }
-//获取格式化的数据
-func (gt *GoTime) GetFormat(format string) string {
-	return gt.Format(gt.NowTime(), format)
+
+func GetFormat(format string) string {
+	return NewBeijing().GetFormat(format)
 }
 // Format time.Time struct to string
 // MM - month - 01
@@ -121,20 +97,15 @@ func (gt *GoTime) GetFormat(format string) string {
 // m - minute - 4
 // ss - second - 05
 // s - second = 5
-func (gt *GoTime) Format(t time.Time, format string) string {
-	res := strings.Replace(format, "MM", t.Format("01"), -1)
-	res = strings.Replace(res, "M", t.Format("1"), -1)
-	res = strings.Replace(res, "DD", t.Format("02"), -1)
-	res = strings.Replace(res, "D", t.Format("2"), -1)
-	res = strings.Replace(res, "YYYY", t.Format("2006"), -1)
-	res = strings.Replace(res, "YY", t.Format("06"), -1)
-	res = strings.Replace(res, "HH", fmt.Sprintf("%02d", t.Hour()), -1)
-	res = strings.Replace(res, "H", fmt.Sprintf("%d", t.Hour()), -1)
-	res = strings.Replace(res, "hh", t.Format("03"), -1)
-	res = strings.Replace(res, "h", t.Format("3"), -1)
-	res = strings.Replace(res, "mm", t.Format("04"), -1)
-	res = strings.Replace(res, "m", t.Format("4"), -1)
-	res = strings.Replace(res, "ss", t.Format("05"), -1)
-	res = strings.Replace(res, "s", t.Format("5"), -1)
-	return res
+func Format(t time.Time, format string) string {
+	return NewBeijing().Format(t, format)
+}
+
+//将格式化为一天的零点
+func ParseStart(s, fromFormat string) (result string, err error){
+	return NewBeijing().ParseStart(s, fromFormat)
+}
+//将格式化为一天最后一刻
+func ParseEnd(s, fromFormat string) (result string, err error) {
+	return NewBeijing().ParseEnd(s, fromFormat)
 }
