@@ -11,7 +11,7 @@ type GoTime struct {
 //实例
 func New() *GoTime {
 	return &GoTime{
-		Location:BeijingLocation,
+		Location: BeijingLocation,
 	}
 }
 
@@ -30,7 +30,6 @@ func (g *GoTime) NowTime() time.Time {
 	return time.Now().In(g.Location)
 }
 
-
 //获取年月日
 func (g *GoTime) Ymd() string {
 	return g.NowTime().Format(YMD)
@@ -41,14 +40,12 @@ func (g *GoTime) Hms() string {
 	return g.NowTime().Format(HMS)
 }
 
-
 //获取当天的开始时间, eg: 2018-01-01 00:00:00
 func (g *GoTime) Start() string {
 	now := g.NowTime()
 	tm := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, g.Location)
 	return tm.Format(TT)
 }
-
 
 //获取当天的结束时间, eg: 2018-01-01 23:59:59
 func (g *GoTime) End() string {
@@ -57,12 +54,10 @@ func (g *GoTime) End() string {
 	return tm.Format(TT)
 }
 
-
 //当前时间 减去 多少秒
 func (g *GoTime) Before(beforeSecond int64) string {
 	return time.Unix(g.NowUnix()-beforeSecond, 0).Format(TT)
 }
-
 
 //当前时间 加上 多少秒
 func (g *GoTime) Next(beforeSecond int64) string {
@@ -78,19 +73,16 @@ func (g *GoTime) RfcToUnix(s string) int64 { //转化所需模板
 	return tm.Unix()
 }
 
-
 //2006-01-02 15:04:05 转 时间戳
 func (g *GoTime) ToUnix(s string) int64 {
 	t, _ := time.ParseInLocation(TT, s, g.Location)
 	return t.Unix()
 }
 
-
 //获取RFC3339格式
-func (g *GoTime) RFC3339() string {
+func (g *GoTime) GetRFC3339() string {
 	return g.NowTime().Format(time.RFC3339)
 }
-
 
 //转换成RFC3339格式
 func (g *GoTime) ToRFC3339(s string) string {
@@ -103,7 +95,7 @@ func (g *GoTime) ToRFC3339(s string) string {
 
 //将RFC3339格式转成正常格式
 func (g *GoTime) RFC3339To(s string) string {
-	t , err := time.ParseInLocation(RFC3339, s, g.Location)
+	t, err := time.ParseInLocation(RFC3339, s, g.Location)
 	if err != nil {
 		return "0000-00-00 00:00:00"
 	}
@@ -133,8 +125,9 @@ func (g *GoTime) GetFormat(format string) string {
 func (g *GoTime) Format(t time.Time, format string) string {
 	return Format(t, format)
 }
+
 //将格式化为一天的零点
-func (g *GoTime) ParseStart(s, fromFormat string) (result string, err error){
+func (g *GoTime) ParseStart(s, fromFormat string) (result string, err error) {
 	tt, err := time.Parse(fromFormat, s)
 	if err != nil {
 		return
@@ -142,6 +135,7 @@ func (g *GoTime) ParseStart(s, fromFormat string) (result string, err error){
 	tt = time.Date(tt.Year(), tt.Month(), tt.Day(), 0, 0, 0, 0, g.Location)
 	return tt.Format(TT), nil
 }
+
 //格式化为一天的最后一刻
 func (g *GoTime) ParseEnd(s, fromFormat string) (result string, err error) {
 	tt, err := time.Parse(fromFormat, s)

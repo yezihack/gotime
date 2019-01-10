@@ -1,14 +1,12 @@
 package gotime
 
 import (
-	"fmt"
-	"strings"
 	"time"
-	"golang.org/x/text/currency"
 )
-func NewBeijing() *GoTime{
+
+func NewBeijing() *GoTime {
 	return &GoTime{
-		Location:BeijingLocation,
+		Location: BeijingLocation,
 	}
 }
 
@@ -18,12 +16,12 @@ func Now() string {
 }
 
 //获取当前时间戳
-func NowUnix()int64 {
+func NowUnix() int64 {
 	return NewBeijing().NowUnix()
 }
 
 //获取当前时间Time
-func  NowTime() time.Time {
+func NowTime() time.Time {
 	return NewBeijing().NowTime()
 }
 
@@ -31,6 +29,7 @@ func  NowTime() time.Time {
 func Ymd() string {
 	return NewBeijing().Ymd()
 }
+
 //获取时分秒
 func Hms() string {
 	return NewBeijing().Hms()
@@ -55,6 +54,7 @@ func Before(beforeSecond int64) string {
 func Next(beforeSecond int64) string {
 	return NewBeijing().Next(beforeSecond)
 }
+
 //2006-01-02T15:04:05Z07:00 转 时间戳
 func RfcToUnix(s string) int64 { //转化所需模板
 	return NewBeijing().RfcToUnix(s)
@@ -66,14 +66,15 @@ func ToUnix(s string) int64 {
 }
 
 //获取RFC3339格式
-func RFC3339() string {
-	return NewBeijing().RFC3339()
+func GetRFC3339() string {
+	return NewBeijing().GetRFC3339()
 }
 
 //转换成RFC3339格式
-func  ToRFC3339(s string) string {
+func ToRFC3339(s string) string {
 	return NewBeijing().ToRFC3339(s)
 }
+
 //将RFC3339格式转成正常格式
 func RFC3339To(s string) string {
 	return NewBeijing().RFC3339To(s)
@@ -82,6 +83,7 @@ func RFC3339To(s string) string {
 func GetFormat(format string) string {
 	return NewBeijing().GetFormat(format)
 }
+
 // Format time.Time struct to string
 // MM - month - 01
 // M - month - 1, single bit
@@ -102,9 +104,10 @@ func Format(t time.Time, format string) string {
 }
 
 //将格式化为一天的零点
-func ParseStart(s, fromFormat string) (result string, err error){
+func ParseStart(s, fromFormat string) (result string, err error) {
 	return NewBeijing().ParseStart(s, fromFormat)
 }
+
 //将格式化为一天最后一刻
 func ParseEnd(s, fromFormat string) (result string, err error) {
 	return NewBeijing().ParseEnd(s, fromFormat)
