@@ -8,13 +8,6 @@ type GoTime struct {
 	Location *time.Location
 }
 
-//实例
-func New() *GoTime {
-	return &GoTime{
-		Location: BeijingLocation,
-	}
-}
-
 //获取当前时间 年-月-日 时:分:秒
 func (g *GoTime) Now() string {
 	return g.NowTime().Format(TT)

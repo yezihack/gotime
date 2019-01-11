@@ -8,7 +8,7 @@ go get -u github.com/yezihack/gotime
 ```
 
 
-# 使用方法
+# 使用方法,默认中国时间
 ```golang
 t := gotime.New()
 //获取当前时间
@@ -19,44 +19,54 @@ tm := t.Now()
 
 # 使用方法
 ```golang
-t := gotime.New()
 //获取当前时间
-tm := t.Now()
-fmt.Println(tm)
+fmt.Println(gotime.Now())
 //print 2018-12-12 15:16:19
 
 //获取当前零晨时间
-tm1 := gotime.New().NowStart()
-fmt.Println(tm1)
+fmt.Println(gotime.NowStart())
 //print 2018-12-12 00:00:00
 
 //获取一个最后一刻
-tm2 := gotime.New().NowEnd()
-fmt.Println(tm2)
+fmt.Println(gotime.NowEnd())
 //print 2018-12-12 23:59:59
 
 //获取当前时间戳
-tm3 := gotime.New().NowUnix()
-fmt.Println(tm3)
+fmt.Println(gotime.NowUnix())
 //1544599059
 
+```
+
+# 自定义时区
 
 ```
+loc, err := time.LoadLocation("America/Cordoba")
+if err != nil {
+    panic(err)
+}
+g := GoTime{
+    Location:loc,
+}
+fmt.Println(g.Now())
+fmt.Println(g.GetRFC3339())
+
+```
+
 
 # 万能的format转换格式函数
 ```
 //自定义格式的万能转换时间函数
-tm := gotime.New().Format(gotime.New().NowTime(), "YYYY-MM-DD HH:mm:ss")
+tm := gotime.Format(gotime.New().NowTime(), "YYYY-MM-DD HH:mm:ss")
 fmt.Println(tm)
 
 //时间
-tm1 := gotime.New().Format(gotime.New().NowTime(), "YYYY-MM-DD")
+tm1 := gotime.Format(gotime.New().NowTime(), "YYYY-MM-DD")
 fmt.Println(tm1)
 
-tm2 := gotime.New().Format(gotime.New().NowTime(), "HH:mm:ss")
+tm2 := gotime.Format(gotime.New().NowTime(), "HH:mm:ss")
 fmt.Println(tm2)
 
-tm3 := gotime.New().Format(gotime.New().NowTime(), "YYYY/MM/DD HH:mm:ss")
+tm3 := gotime.Format(gotime.New().NowTime(), "YYYY/MM/DD HH:mm:ss")
 fmt.Println(tm3)
 ```
 
