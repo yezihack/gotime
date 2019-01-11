@@ -56,17 +56,17 @@ fmt.Println(g.GetRFC3339())
 # 万能的format转换格式函数
 ```
 //自定义格式的万能转换时间函数
-tm := gotime.Format(gotime.New().NowTime(), "YYYY-MM-DD HH:mm:ss")
+tm := gotime.Format(gotime.NowTime(), "YYYY-MM-DD HH:mm:ss")
 fmt.Println(tm)
 
 //时间
-tm1 := gotime.Format(gotime.New().NowTime(), "YYYY-MM-DD")
+tm1 := gotime.Format(gotime.NowTime(), "YYYY-MM-DD")
 fmt.Println(tm1)
 
-tm2 := gotime.Format(gotime.New().NowTime(), "HH:mm:ss")
+tm2 := gotime.Format(gotime.NowTime(), "HH:mm:ss")
 fmt.Println(tm2)
 
-tm3 := gotime.Format(gotime.New().NowTime(), "YYYY/MM/DD HH:mm:ss")
+tm3 := gotime.Format(gotime.NowTime(), "YYYY/MM/DD HH:mm:ss")
 fmt.Println(tm3)
 ```
 
