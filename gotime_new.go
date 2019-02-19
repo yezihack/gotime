@@ -34,15 +34,15 @@ func (g *GoTime) Hms() string {
 }
 
 //获取当天的开始时间, eg: 2018-01-01 00:00:00
-func (g *GoTime) Start() string {
-	now := g.NowTime()
+func (g *GoTime) Start(day int) string {
+	now := g.NowTime().AddDate(0, 0, day)
 	tm := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, g.Location)
 	return tm.Format(TT)
 }
 
 //获取当天的结束时间, eg: 2018-01-01 23:59:59
-func (g *GoTime) End() string {
-	now := g.NowTime()
+func (g *GoTime) End(day int) string {
+	now := g.NowTime().AddDate(0, 0, day)
 	tm := time.Date(now.Year(), now.Month(), now.Day(), 23, 59, 59, 0, g.Location)
 	return tm.Format(TT)
 }

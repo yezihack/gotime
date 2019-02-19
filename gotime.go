@@ -15,6 +15,7 @@ func Now() string {
 	return NewBeijing().Now()
 }
 
+
 //获取当前时间戳
 func NowUnix() int64 {
 	return NewBeijing().NowUnix()
@@ -36,13 +37,13 @@ func Hms() string {
 }
 
 //获取当天的开始时间, eg: 2018-01-01 00:00:00
-func Start() string {
-	return NewBeijing().Start()
+func Start(day int) string {
+	return NewBeijing().Start(day)
 }
 
 //获取当天的结束时间, eg: 2018-01-01 23:59:59
-func End() string {
-	return NewBeijing().End()
+func End(day int) string {
+	return NewBeijing().End(day)
 }
 
 //当前时间 减去 多少秒
@@ -102,6 +103,7 @@ func GetFormat(format string) string {
 func Format(t time.Time, format string) string {
 	return NewBeijing().Format(t, format)
 }
+
 
 //将格式化为一天的零点
 func ParseStart(s, fromFormat string) (result string, err error) {
